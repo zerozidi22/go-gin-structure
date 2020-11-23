@@ -1,41 +1,49 @@
 package v1
 
 import (
-	"fmt"
+	"net/http"
+
+	"go-gin-structure/pkg/app"
+
+	"go-gin-structure/pkg/enum"
 
 	"github.com/gin-gonic/gin"
 )
 
+// [get] using param
 func GetTags(c *gin.Context) {
-	// appG := app.Gin{C: c}
+	appG := app.Gin{C: c}
 	name := c.Query("name")
-	fmt.Print(name)
-	fmt.Print("getTags Called \n")
-	// state := -1
-	// if arg := c.Query("state"); arg != "" {
-	// 	state = com.StrTo(arg).MustInt()
-	// }
 
-	// tagService := tag_service.Tag{
-	// 	Name:     name,
-	// 	State:    state,
-	// 	PageNum:  util.GetPage(c),
-	// 	PageSize: setting.AppSetting.PageSize,
-	// }
-	// tags, err := tagService.GetAll()
-	// if err != nil {
-	// 	appG.Response(http.StatusInternalServerError, e.ERROR_GET_TAGS_FAIL, nil)
-	// 	return
-	// }
+	appG.Response(http.StatusOK, enum.SUCCESS, map[string]interface{}{
+		"name":  name,
+		"total": "count",
+	})
+}
 
-	// count, err := tagService.Count()
-	// if err != nil {
-	// 	appG.Response(http.StatusInternalServerError, e.ERROR_COUNT_TAG_FAIL, nil)
-	// 	return
-	// }
+type AddTagForm struct {
+	Name      string `json:"name" form:"name" valid:"Required;MaxSize(100)"`
+	CreatedBy string `json:"created_by" form:"created_by" valid:"Required;MaxSize(100)"`
+	State     int    `json:"state" form:"state" valid:"Range(0,1)"`
+}
 
-	// appG.Response(http.StatusOK, e.SUCCESS, map[string]interface{}{
-	// 	"lists": tags,
-	// 	"total": count,
-	// })
+// [POST] using body
+/*
+{
+    "name":     "HEESU",
+	"created_by": "HAPPY_WATER",
+	"state":     0
+}
+*/
+func AddTag(c *gin.Context) {
+	var (
+		appG = app.Gin{C: c}
+		form AddTagForm
+	)
+
+	appG.Response(http.StatusOK, enum.SUCCESS, map[string]interface{}{
+		"name":      form.Name,
+		"createdBy": form.CreatedBy,
+		"state":     form.State,
+	})
 }
