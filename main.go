@@ -2,31 +2,39 @@ package main
 
 import (
 	"fmt"
+	"go-gin-structure/models"
+	"go-gin-structure/pkg/setting"
+	"log"
+	"net/http"
 
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
+	"go-gin-structure/routers"
+
+	"github.com/gin-gonic/gin"
 )
 
+func init() {
+	setting.Setup()
+	models.Setup()
+}
+
 func main() {
+	gin.SetMode(setting.ServerSetting.RunMode)
 
-	// dsn := "root:kim24153020@tcp(127.0.0.1:3306)/go?charset=utf8mb4&parseTime=True&loc=Local"
-	// db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	db, err := gorm.Open(mysql.New(mysql.Config{
-		DSN: "root:#kim24153020@tcp(localhost:3306)/go?charset=utf8mb4&parseTime=True&loc=Local", // data source name                                                                            // auto configure based on currently MySQL version
-	}), &gorm.Config{})
+	routersInit := routers.InitRouter()
+	readTimeout := setting.ServerSetting.ReadTimeout
+	writeTimeout := setting.ServerSetting.WriteTimeout
+	endPoint := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
+	maxHeaderBytes := 1 << 20
 
-	// db, err := gorm.Open("mysql", "root:#kim24153020@tcp(127.0.0.1:3306)/go?charset=utf8&parseTime=True&loc=Local")
+	server := &http.Server{
+		Addr:           endPoint,
+		Handler:        routersInit,
+		ReadTimeout:    readTimeout,
+		WriteTimeout:   writeTimeout,
+		MaxHeaderBytes: maxHeaderBytes,
+	}
 
-	fmt.Print(db)
-	fmt.Print("------------------------")
-	fmt.Print(err)
-	// if err != nil {
-	// 	fmt.Println("statuse: ", err)
-	// }
-	// defer Config.DB.Close()
-	// Config.DB.AutoMigrate(&Models.Book{})
+	log.Printf("[info] start http server listening %s", endPoint)
 
-	// r := Routers.SetupRouter()
-	// running
-	// r.Run()
+	server.ListenAndServe()
 }
