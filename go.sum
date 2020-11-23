@@ -1,5 +1,7 @@
 github.com/360EntSecGroup-Skylar/excelize v1.3.1-0.20180527032555-9e463b461434 h1:sJVNhDPQ1uL3izsJQGWFQb3lUvFloaTIgqz0ClEp6aQ=
 github.com/360EntSecGroup-Skylar/excelize v1.3.1-0.20180527032555-9e463b461434/go.mod h1:R8KYLmGns0vDPe6/HyphW0mzW+MFexlGDafU0ykVEnU=
+github.com/EDDYCJY/go-gin-example v0.0.0-20200505102242-63963976dee0 h1:eB4cf+PC0faCxlJwe8+2E8/0FBEsm+13ZbYMpZPdcno=
+github.com/EDDYCJY/go-gin-example v0.0.0-20200505102242-63963976dee0/go.mod h1:66/PDewGK5IUxJNsxmAenHAyCiOpGvTqh9EUvcH1mjs=
 github.com/PuerkitoBio/purell v1.1.0/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=
 github.com/PuerkitoBio/purell v1.1.1-0.20180310210909-975f53781597 h1:8+pMa56PPVkN6NbWGZbNIWLVIitrF8AQZ95d4UAhqmE=
 github.com/PuerkitoBio/purell v1.1.1-0.20180310210909-975f53781597/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=

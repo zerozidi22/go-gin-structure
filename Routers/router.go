@@ -1,6 +1,8 @@
 package routers
 
 import (
+	v1 "go-gin-structure/routers/api/v1"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,5 +12,8 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
+	apiv1 := r.Group("/api/v1")
+
+	apiv1.GET("/test", v1.GetTags)
 	return r
 }

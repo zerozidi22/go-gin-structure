@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"go-gin-structure/models"
 	"go-gin-structure/pkg/setting"
 	"log"
 	"net/http"
@@ -14,7 +13,6 @@ import (
 
 func init() {
 	setting.Setup()
-	models.Setup()
 }
 
 func main() {
